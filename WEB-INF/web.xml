@@ -1,8 +1,7 @@
-
 <web-app>
-    <listener>
-        <listener-class>InitListener</listener-class>
-    </listener>
+	<listener>
+    <listener-class>init.InitListener</listener-class>
+</listener>
 </web-app>
 
 
