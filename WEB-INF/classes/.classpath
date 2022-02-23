@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/Desktop/DUT 2ème année/JavaEE/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/Desktop/DUT 2ème année/JavaEE/lib/mediatek2022.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
