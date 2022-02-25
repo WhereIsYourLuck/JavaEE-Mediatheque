@@ -7,8 +7,12 @@ public class InitListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-			
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		try {
+			Class.forName("persistance.MediathequeData");
+			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

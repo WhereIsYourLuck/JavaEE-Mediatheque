@@ -1,6 +1,6 @@
 package persistance;
 
-import java.util.List;
+import java.sql.*;
 import mediatek2022.*;
 
 // classe mono-instance  dont l'unique instance est connue de la médiatheque
@@ -10,9 +10,17 @@ public class MediathequeData implements PersistentMediatheque {
 // Jean-François Brette 01/01/2018
 	static {
 		Mediatheque.getInstance().setData(new MediathequeData());
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mediatheque", "root", "root");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur connexion bdd mysql");
+		}
 	}
 
 	private MediathequeData() {
+		
 	}
 
 	// renvoie la liste de tous les documents disponibles de la médiathèque
