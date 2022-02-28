@@ -9,6 +9,7 @@ import mediatek2022.*;
 // via une auto-déclaration dans son bloc static
 
 public class MediathequeData implements PersistentMediatheque {
+	List<Utilisateur> utilisateurs;
 // Jean-François Brette 01/01/2018
 	Connection conn = null;
 	static {
@@ -26,12 +27,19 @@ public class MediathequeData implements PersistentMediatheque {
 		}
 	}
 	public void getInformationsBD() {
-		String req = "SELECT id, auteur, nomDoc, typeDoc, empruntUser FROM documents";
+		String reqDoc = "SELECT id, auteur, nomDoc, typeDoc, empruntUser FROM documents";
+		String reqUser = "SELECT idUser, nomUser, mdp, typeUser FROM utilisateurs";
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet res = stmt.executeQuery(req);
-			while(res.next()) {
-				new Document(res.getInt("id"), res.getString("auteur"), res.getString("auteur"), res.getInt("empruntUser"));
+			Statement stmtDoc = conn.createStatement();
+			ResultSet resDoc = stmtDoc.executeQuery(reqDoc);
+			while(resDoc.next()) {
+				new Document(resDoc.getInt("id"), resDoc.getString("auteur"), resDoc.getString("nomDoc"), resDoc.getString("typeDoc"), resDoc.getInt("empruntUser"));
+			}
+			
+			Statement stmtUser = conn.createStatement();
+			ResultSet resUser = stmtUser.executeQuery(reqUser);
+			while(resUser.next()) {
+				new Utilisateur(resUser.getInt("idUser"), resUser.getString("nomUser"), resUser.getString("typeUser"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,6 +49,8 @@ public class MediathequeData implements PersistentMediatheque {
 	// renvoie la liste de tous les documents disponibles de la médiathèque
 	@Override
 	public List<Document> tousLesDocumentsDisponibles() {
+		String req = "SELECT "
+		return 
 	}
 
 	// va récupérer le User dans la BD et le renvoie
