@@ -1,15 +1,13 @@
-
-<%
-    String Nom = request.getParameter("login");
-    String mdp = request.getParameter("password");
-    
-%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Connexion</title>
 </head>
+<%
+    String Nom = request.getParameter("Nom");
+    String mdp = request.getParameter("mdp");
 
+%>
 <body>
     <form>
         <label for="login">Nom</label><br>
@@ -18,6 +16,5 @@
         <input type="text" id="mdp" name="password"><br>
         <input type="submit" value="Submit">
       </form>
-      <p><% int Valeur="Ok";<p>
 </body>
 </html>

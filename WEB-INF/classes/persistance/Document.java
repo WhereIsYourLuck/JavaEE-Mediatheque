@@ -19,6 +19,9 @@ public class Document implements mediatek2022.Document{
 	}
 	@Override
 	public boolean disponible() {
+		if(empruntUser == 0) {
+			return true;
+		} else
 		return false;
 	}
 

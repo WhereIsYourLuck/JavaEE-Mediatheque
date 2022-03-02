@@ -1,6 +1,7 @@
 package persistance;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import mediatek2022.*;
@@ -9,12 +10,13 @@ import mediatek2022.*;
 // via une auto-déclaration dans son bloc static
 
 public class MediathequeData implements PersistentMediatheque {
-	List<Utilisateur> utilisateurs;
+	List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+	List<Document> documents = new ArrayList<Document>();
+	List<Document> documentsDispo = new ArrayList<Document>();
 // Jean-François Brette 01/01/2018
 	Connection conn = null;
 	static {
 		Mediatheque.getInstance().setData(new MediathequeData());
-		
 	}
 
 	private MediathequeData() {
@@ -33,30 +35,38 @@ public class MediathequeData implements PersistentMediatheque {
 			Statement stmtDoc = conn.createStatement();
 			ResultSet resDoc = stmtDoc.executeQuery(reqDoc);
 			while(resDoc.next()) {
-				new Document(resDoc.getInt("id"), resDoc.getString("auteur"), resDoc.getString("nomDoc"), resDoc.getString("typeDoc"), resDoc.getInt("empruntUser"));
-			}
-			
+				documents.add(new Document(resDoc.getInt("id"), resDoc.getString("auteur"), resDoc.getString("nomDoc"), resDoc.getString("typeDoc"), resDoc.getInt("empruntUser")));
+			}		
 			Statement stmtUser = conn.createStatement();
 			ResultSet resUser = stmtUser.executeQuery(reqUser);
 			while(resUser.next()) {
-				new Utilisateur(resUser.getInt("idUser"), resUser.getString("nomUser"), resUser.getString("typeUser"));
+				utilisateurs.add(new Utilisateur(resUser.getInt("idUser"), resUser.getString("nomUser"), resUser.getString("mdp"), resUser.getString("typeUser")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	// renvoie la liste de tous les documents disponibles de la médiathèque
 	@Override
-	public List<Document> tousLesDocumentsDisponibles() {
-		String req = "SELECT "
-		return 
+	public List<mediatek2022.Document> tousLesDocumentsDisponibles() {
+//			for (Document i : documents) {
+//				if(!i.disponible()) {
+//					documentsDispo.add(i);
+//				}
+//			}
+//		return documentsDispo;
+		return null;
 	}
 
 	// va récupérer le User dans la BD et le renvoie
 	// si pas trouvé, renvoie null
 	@Override
 	public Utilisateur getUser(String login, String password) {
+		for(Utilisateur i : utilisateurs) {
+			if(i.name() == login && i.password() == password) {
+				return i;
+			}
+		}
 		return null;
 	}
 
