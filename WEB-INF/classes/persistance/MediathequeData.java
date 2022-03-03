@@ -49,12 +49,10 @@ public class MediathequeData implements PersistentMediatheque {
 	// renvoie la liste de tous les documents disponibles de la médiathèque
 	@Override
 	public List<mediatek2022.Document> tousLesDocumentsDisponibles() {
-//			for (Document i : documents) {
-//				if(!i.disponible()) {
-//					documentsDispo.add(i);
-//				}
-//			}
-//		return documentsDispo;
+		return null;
+	}
+	
+	public List<Document> tousLesDocumentsDispo(){
 		return null;
 	}
 
@@ -84,5 +82,4 @@ public class MediathequeData implements PersistentMediatheque {
 		// args [1] --> l'auteur
 		// etc... variable suivant le type de document
 	}
-
 }
