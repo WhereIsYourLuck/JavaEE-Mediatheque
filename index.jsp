@@ -6,9 +6,13 @@
     Utilisateur user = Mediatheque.getInstance().getUser(username, password);
     String notok = "";
     if(user != null){
-        notok = user.name();
+        if(user.isBibliothecaire()){
+            response.sendRedirect("http://localhost:8080/JaveEEMediatheque/bibliothecairePanel.jsp");  
+        } else {
+            response.sendRedirect("http://localhost:8080/JaveEEMediatheque/clientPanel.jsp");
+        }
     }
-
+    
 %>
 <!DOCTYPE html>
 <html>
