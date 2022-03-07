@@ -11,7 +11,6 @@ public class Utilisateur implements mediatek2022.Utilisateur{
 	
 	
 	public Utilisateur(int id, String name, String password, String isBibliothécaire) { //, List<Document> documentsEmpruntes
-		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;

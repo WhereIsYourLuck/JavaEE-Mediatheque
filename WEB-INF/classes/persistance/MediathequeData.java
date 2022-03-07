@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdk.internal.misc.FileSystemOption;
 import mediatek2022.*;
 
 // classe mono-instance  dont l'unique instance est connue de la médiatheque
@@ -43,6 +44,7 @@ public class MediathequeData implements PersistentMediatheque {
 				utilisateurs.add(new Utilisateur(resUser.getInt("idUser"), resUser.getString("nomUser"), resUser.getString("mdp"), resUser.getString("typeUser")));
 			}
 		} catch (SQLException e) {
+			System.err.println("Erreur reqssssssssssssssssssssss");
 			e.printStackTrace();
 		}
 	}
@@ -61,12 +63,13 @@ public class MediathequeData implements PersistentMediatheque {
 	@Override
 	public Utilisateur getUser(String login, String password) {
 		for(Utilisateur i : utilisateurs) {
-			if(i.name() == login && i.password() == password) {
+			if(i.name().equals(login) && i.password().equals(password)) {
 				return i;
 			}
 		}
 		return null;
 	}
+	
 
 	// va récupérer le document de numéro numDocument dans la BD
 	// et le renvoie

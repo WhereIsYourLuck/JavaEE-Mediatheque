@@ -10,7 +10,6 @@ public class Document implements mediatek2022.Document{
 	private int empruntUser;
 	
 	public Document(int id, String auteur, String nomDoc, String typeDoc, int empruntUser) {
-		super();
 		this.id = id;
 		this.auteur = auteur;
 		this.nomDoc = nomDoc;

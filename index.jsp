@@ -1,9 +1,13 @@
-<%@page import="persistance.MediathequeData" %>
+<%@page import="mediatek2022.Mediatheque"%>
+<%@page import="mediatek2022.Utilisateur"%>
 <%
-    String pseudo = request.getParameter("login");
-    String mdp = request.getParameter("password");
-    this.getUser(pseudo, mdp);
+    String username = request.getParameter("login");
+    String password = request.getParameter("password");
+    Utilisateur user = Mediatheque.getInstance().getUser(username, password);
     String notok = "";
+    if(user != null){
+        notok = user.name();
+    }
 
 %>
 <!DOCTYPE html>
@@ -13,7 +17,7 @@
 </head>
 
 <body>
-    <form>
+    <form action="index.jsp" method="post">
         <label for="login">Nom</label><br>
         <input type="text" id="lgn" name="login"><br>
         <label for="password">Mot de passe</label><br>
