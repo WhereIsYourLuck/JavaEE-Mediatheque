@@ -4,6 +4,7 @@
     String username = request.getParameter("login");
     String password = request.getParameter("password");
     Utilisateur user = Mediatheque.getInstance().getUser(username, password);
+    session.setAttribute("user", user);
     String notok = "";
     if(user != null){
         if(user.isBibliothecaire()){
