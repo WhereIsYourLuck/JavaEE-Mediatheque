@@ -32,6 +32,9 @@ public class PersisUtilisateur implements Utilisateur{
 
 	@Override
 	public Object[] data() {
+		//Passage de tous les autres attributs utiles ici
+		//MDP, tableau de livre emprunté
+		//Très utile car les instances sont volatiles : On recrée le même utilisateur à chaque modification
 		return null;
 	}
 

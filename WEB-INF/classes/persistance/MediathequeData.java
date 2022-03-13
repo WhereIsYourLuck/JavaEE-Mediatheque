@@ -20,6 +20,7 @@ public class MediathequeData implements PersistentMediatheque {
 
 	private MediathequeData() {
 		try {
+			//Connexion à la bdd MySQL
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mediatheque", "root", "root");
 		} catch (SQLException e) {
 			e.printStackTrace();
