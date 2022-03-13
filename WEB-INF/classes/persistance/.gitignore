@@ -1,2 +1,10 @@
 /MediathequeData.class
 /InitListener.class
+/BddRequetes.class
+/Document.class
+/Utilisateur.class
+/DocumentP.class
+/DocumentPers.class
+/PersisDocument.class
+/PersisUtilisateurs.class
+/PersisUtilisateur.class
