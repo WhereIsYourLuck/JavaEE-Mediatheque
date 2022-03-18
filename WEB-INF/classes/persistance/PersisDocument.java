@@ -4,13 +4,14 @@ import mediatek2022.Document;
 import mediatek2022.Utilisateur;
 
 public class PersisDocument implements Document{
+	private int idDoc;
 	private String auteur;
 	private String nomDoc;
 	private String typeDoc;
 	private int empruntUser;
 	
-	public PersisDocument(String auteur, String nomDoc, String typeDoc, int empruntUser) {
-		super();
+	public PersisDocument(int idDoc, String auteur, String nomDoc, String typeDoc, int empruntUser) {
+		this.idDoc = idDoc;
 		this.auteur = auteur;
 		this.nomDoc = nomDoc;
 		this.typeDoc = typeDoc;
