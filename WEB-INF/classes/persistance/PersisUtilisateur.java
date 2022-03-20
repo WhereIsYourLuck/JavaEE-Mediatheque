@@ -34,7 +34,7 @@ public class PersisUtilisateur implements Utilisateur{
 
 	@Override
 	public boolean isBibliothecaire() {
-		if(Integer.parseInt(isBibliothecaire) == 0) {
+		if(Integer.parseInt(isBibliothecaire) == 1) {
 			return true;
 		} else {
 			return false;
