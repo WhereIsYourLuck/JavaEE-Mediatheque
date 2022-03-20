@@ -9,7 +9,6 @@
     String username = request.getParameter("login");
     String password = request.getParameter("password");
     Utilisateur user = Mediatheque.getInstance().getUser(username, password);
-
     //On vérifie l'utilisateur pour savoir où le rediriger et gérer sa variable session
     if(user != null){
         if(user.isBibliothecaire()){

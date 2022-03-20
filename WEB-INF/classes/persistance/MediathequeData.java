@@ -54,29 +54,21 @@ public class MediathequeData implements PersistentMediatheque {
 	// si pas trouvé, renvoie null
 	@Override
 	public Utilisateur getUser(String login, String password) {
-		String sqlUser = "SELECT idUser, nomUser, mdp, typeUser FROM utilisateurs WHERE nomUser =" + "'" + login + "'"+ " AND mdp =" + "'" + password + "'";
-		String listDoc = "SELECT * from documents d, utilisateurs u WHERE nomUser =" + "'" + login + "' AND d.empruntUser = u.idUser";
 		//Expliqué avec Brette
 		//Avec notre méthode de bdd nécessaire de créer les doc à chaque getUsER pour les remettre dans object[] data
 		//Dans la variable session on devra ranger login et mdp pour pouvoir faire appel à la méthode ou les mettre dans la fonction data
 		//
+		String sqlUser = "SELECT idUser, nomUser, mdp, typeUser FROM utilisateurs WHERE nomUser = ? AND mdp = ?";
+		
 		try {
-			//Creation de l'objet utilisateur
-			Statement stmtUser = conn.createStatement();
-			ResultSet resUser = stmtUser.executeQuery(sqlUser);
-			
-			//Creation de sa liste de documents empruntés
-			Statement stmtDoc = conn.createStatement();
-			ResultSet resDoc = stmtDoc.executeQuery(listDoc);
+            PreparedStatement stmtUser = conn.prepareStatement(sqlUser);
+            stmtUser.setString(1, login);
+            stmtUser.setString(2, password);
+            ResultSet resUser = stmtUser.executeQuery();
 			if(resUser == null)
 				return null;
 			while(resUser.next()) {
 				Utilisateur user = new PersisUtilisateur(resUser.getInt("idUser"),resUser.getString("nomUser"), resUser.getString("mdp"), resUser.getString("typeUser"));
-				while(resDoc.next()) {
-					//Ajouter dans data jsp comment faire
-					new PersisDocument(resDoc.getInt("d.id"), resDoc.getString("d.auteur"),resDoc.getString("d.nomDoc"),resDoc.getString("d.typeDoc"),resDoc.getInt("d.empruntUser"));
-					System.out.println(user.data());
-				}
 				return user;
 			}	
 		} catch (SQLException e) {
@@ -91,15 +83,17 @@ public class MediathequeData implements PersistentMediatheque {
 	// si pas trouvé, renvoie null
 	@Override
 	public Document getDocument(int numDocument) {
-		String sqlDoc = "SELECT * FROM documents WHERE id='" + numDocument + "'";
+		String sqlDoc = "SELECT * FROM documents WHERE id= ?";
 		try {
-			Statement stmtDoc = conn.createStatement();
-			ResultSet resDoc = stmtDoc.executeQuery(sqlDoc);
+			PreparedStatement stmtDoc = conn.prepareStatement(sqlDoc);
+			stmtDoc.setInt(1, numDocument);
+			ResultSet resDoc = stmtDoc.executeQuery();
 			System.out.println(resDoc);
 			if(resDoc == null)
 				return null;
 			while(resDoc.next()) {
 				Document doc = new PersisDocument(resDoc.getInt("id"), resDoc.getString("auteur"),resDoc.getString("nomDoc"),resDoc.getString("typeDoc"),resDoc.getInt("empruntUser"));
+				
 				return doc;
 			}	
 		} catch (SQLException e) {
